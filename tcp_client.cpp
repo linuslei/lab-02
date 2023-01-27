@@ -49,12 +49,15 @@ int main(int argc, char const *argv[])
 	getaddrinfo(server_ip.c_str(), server_port.c_str(), &hints, &server_addr);
 
 	// TODO: Connect() to the server (hint: you'll need to use server_addr)
-	if (connect(client_fd, server_addr->ai_addr, sizeof(server_addr)))
+	if (connect(client_fd, server_addr->ai_addr, sizeof(server_addr)) < 0)
 	{
 		printf("ERROR connecting");
 	}
 	// TODO: Retreive user input
-	fgets(socket_read_buffer, 255, stdin);
+	printf("Please enter the message: ");
+	bzero(socket_read_buffer,1024);
+	fgets(socket_read_buffer,1023,stdin);
+
 	// TODO: Send() the user input to the server
 	rw_flag = write(client_fd, socket_read_buffer, strlen(socket_read_buffer));
 	if (rw_flag < 0)
