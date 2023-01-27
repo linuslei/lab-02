@@ -3,10 +3,12 @@
 
 ## Team Members
 - Linus Lei
-- team member 2
+- Way Zheng
 
 ## Lab Question Answers
 
 Answer for Question 1: 
+
+text sample answer test
 
 ...
