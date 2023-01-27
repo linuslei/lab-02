@@ -1,40 +1,45 @@
-// Server side C/C++ program to demonstrate Socket programming 
+// Server side C/C++ program to demonstrate Socket programming
 // Here's some include statements that might be helpful for you
-#include <string> 
+#include <string>
 #include <cstring>
 #include <iostream>
 #include <stdlib.h>
-#include <sys/socket.h> 
+#include <sys/socket.h>
 #include <netdb.h>
-#include <netinet/in.h> 
+#include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 
-int main(int argc, char const *argv[]) 
-{ 
+int main(int argc, char const *argv[])
+{
 	// check to see if user input is valid
 	char socket_read_buffer[1024];
-	
+
 	// TODO: Fill out the server ip and port
-	std::string server_ip = "";
-	std::string server_port = "";
+	std::string server_ip = "10.26.28.199";
+	std::string server_port = "10000";
 
 	int opt = 1;
 	int client_fd = -1;
 
+	int rw_flag = -1;
+
 	// TODO: Create a TCP socket()
+	client_fd = socket(AF_INET, SOCK_STREAM, 0);
 
 	// Enable reusing address and port
-	if (setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) { 
+	if (setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
+	{
 		return -1;
 	}
 
 	// Check if the client socket was set up properly
-	if(client_fd == -1){
+	if (client_fd == -1)
+	{
 		printf("Error- Socket setup failed");
 		return -1;
 	}
-	
+
 	// Helping you out by pepping the struct for connecting to the server
 	struct addrinfo hints;
 	struct addrinfo *server_addr;
@@ -44,10 +49,25 @@ int main(int argc, char const *argv[])
 	getaddrinfo(server_ip.c_str(), server_port.c_str(), &hints, &server_addr);
 
 	// TODO: Connect() to the server (hint: you'll need to use server_addr)
+	if (connect(client_fd, server_addr->ai_addr, sizeof(server_addr)))
+	{
+		printf("ERROR connecting");
+	}
 	// TODO: Retreive user input
+	fgets(socket_read_buffer, 255, stdin);
 	// TODO: Send() the user input to the server
+	rw_flag = write(client_fd, socket_read_buffer, strlen(socket_read_buffer));
+	if (rw_flag < 0)
+	{
+		printf("ERROR writing to socket");
+	}
 	// TODO: Recieve any messages from the server and print it here. Don't forget to make sure the string is null terminated!
+	rw_flag = read(client_fd, socket_read_buffer, strlen(socket_read_buffer));
+	if (rw_flag < 0)
+	{
+		printf("ERROR reading to socket");
+	}
 	// TODO: Close() the socket
-
-	return 0; 
-} 
+	close(client_fd);
+	return 0;
+}
