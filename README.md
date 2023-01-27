@@ -3,7 +3,11 @@
 
 ## Team Members
 - Linus Lei
+<<<<<<< HEAD
 - Way Zheng
+=======
+- team member 2
+>>>>>>> 74d38c2f14c7dc24ec1b1d82c8c3b125e48c1263
 
 ## Lab Question Answers
 
