@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 	char socket_read_buffer[1024];
 
 	// TODO: Fill out the server ip and port
-	std::string server_ip = "10.26.28.199";
+	std::string server_ip = "localhost";
 	std::string server_port = "10000";
 
 	int opt = 1;
@@ -49,7 +49,7 @@ int main(int argc, char const *argv[])
 	getaddrinfo(server_ip.c_str(), server_port.c_str(), &hints, &server_addr);
 
 	// TODO: Connect() to the server (hint: you'll need to use server_addr)
-	if (connect(client_fd, server_addr->ai_addr, sizeof(server_addr)) < 0)
+	if (connect(client_fd, server_addr->ai_addr, server_addr->ai_addrlen) < 0)
 	{
 		printf("ERROR connecting");
 	}
