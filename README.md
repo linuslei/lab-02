@@ -14,7 +14,7 @@ Question 1: How did the reliability of UDP change when you added 50% loss to you
 -I sent 1 to 10 but the server only received 2,3,7,9;
 -I sent 1 to 10 again but the server only received 3,4,6,9,10.
 -what happend: some of the contents are lost during the transission;
--why did this occur: UTP is only responsible for sending packets, and it wouln't detect the lost packages. as there’s no error control mechanism in UDP, it simply discards the packet as soon as an error is detected. Furthermore, transmitting a lot of data using UDP may cause congestion in a network.  //rewording
+-why did this occur: UTP is only responsible for sending packets, and it wouln't detect the lost packages. as there’s no error control mechanism in UDP, it simply discards the packet as soon as an error is detected. Furthermore, transmitting a lot of data using UDP may cause congestion in a network.  
 
 Question 2: How did the reliability of TCP change? Why did this occur?
 
