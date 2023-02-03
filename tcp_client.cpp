@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 	char socket_read_buffer[1024];
 
 	// TODO: Fill out the server ip and port
-	std::string server_ip = "localhost";
+	std::string server_ip = "172.20.10.10";
 	std::string server_port = "10000";
 
 	int opt = 1;
@@ -30,6 +30,7 @@ int main(int argc, char const *argv[])
 	// Enable reusing address and port
 	if (setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
 	{
+		printf("Error0- Socket setup failed");
 		return -1;
 	}
 
